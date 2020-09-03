@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+    }
+    
+    td, th {
+      border: 1px solid #eeecec;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #ebebeb;
+    }
+    .card {
+  margin-left:15%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 70%;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+    </style>
+  <div class="card">
+  <div class="container">
+  <table >
+    <tr>
+      <th>UserID</th>
+      <th>post name</th>
+      <th>post description</th>
+    </tr>
+    <tr ng-repeat="x in names">
+      <td>{{x.id}}</td>
+      <td>{{x.title}}</td>
+      <td>{{x.body}}</td>
+    </tr>
+  </table>
+</div>
+</div>
+</div>
+
+<p>{{jay}}</p>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("https://jsonplaceholder.typicode.com/posts")
+    .then(function (response) {$scope.names = response.data
+      console.log(response)
+    console.log($scope.names)});
+    
+});
+</script>
+
+</body>
+</html>
